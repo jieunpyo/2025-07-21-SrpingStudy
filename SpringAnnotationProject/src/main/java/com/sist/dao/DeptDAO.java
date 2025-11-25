@@ -9,14 +9,14 @@ import com.sist.mapper.DeptMapper;
 import com.sist.vo.*;
 @Repository
 public class DeptDAO {
-	@Autowired
+  @Autowired
   private DeptMapper mapper;
   /*
    *  @Select("SELECT * FROM dept ORDER BY deptno")
-  	  public List<DeptVO> deptListData();
+      public List<DeptVO> deptListData();
    */
-	public List<DeptVO> deptListData()
-	{
-		return mapper.deptListData();
-	}
+  public List<DeptVO> deptListData()
+  {
+	  return mapper.deptListData();
+  }
 }
