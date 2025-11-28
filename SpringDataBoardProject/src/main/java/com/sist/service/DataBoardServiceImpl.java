@@ -33,4 +33,42 @@ public class DataBoardServiceImpl implements DataBoardService{
 		// TODO Auto-generated method stub
 		return dao.databoardDetailData(no);
 	}
+
+	@Override
+	public boolean databoardDelete(int no, String pwd) {
+		// TODO Auto-generated method stub
+		boolean bCheck=false;
+		String db_pwd=dao.databoardGetPassword(no);
+		if(db_pwd.equals(pwd))
+		{
+			bCheck=true;
+			dao.databoardDelete(no);
+		}
+		return bCheck;
+	}
+
+	@Override
+	public DataBoardVO databoardFileInfoData(int no) {
+		// TODO Auto-generated method stub
+		return dao.databoardFileInfoData(no);
+	}
+
+	@Override
+	public DataBoardVO databoardUpdateData(int no) {
+		// TODO Auto-generated method stub
+		return dao.databoardUpdateData(no);
+	}
+
+	@Override
+	public boolean databoardUPdate(DataBoardVO vo) {
+		// TODO Auto-generated method stub
+		boolean bCheck=false;
+		String db_pwd=dao.databoardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			bCheck=true;
+			dao.databoardUPdate(vo);
+		}
+		return bCheck;
+	}
 }
