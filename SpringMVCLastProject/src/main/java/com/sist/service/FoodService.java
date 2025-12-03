@@ -14,4 +14,6 @@ public interface FoodService {
 	public FoodVO foodCookieData(int fno);
 	public List<FoodVO> foodFindData(Map map);
 	public int foodFindTotalpage(String address);
+	public List<FoodVO> foodTypeData(Map map);
+	public int foodTypeTotalpage(String type);
 }

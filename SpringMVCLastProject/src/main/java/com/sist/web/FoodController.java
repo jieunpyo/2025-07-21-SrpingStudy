@@ -39,7 +39,7 @@ public class FoodController {
 	   	  {
 	   		  for(int i=0;i<cookies.length;i++)
 	   		  {
-	   			  if(cookies[i].equals("food_"+fno))
+	   			  if(cookies[i].getName().equals("food_"+fno))
 	   			  {
 	   				  cookies[i].setPath("/");
 	   				  cookies[i].setMaxAge(0);
@@ -67,6 +67,12 @@ public class FoodController {
    public String food_find(Model model)
    {
 	   model.addAttribute("main_jsp", "../food/find.jsp");
-	   return"main/main";
+	   return "main/main";
+   }
+   @GetMapping("food/type.do")
+   public String food_type(Model model)
+   {
+	   model.addAttribute("main_jsp", "../food/type.jsp");
+	   return "main/main";
    }
 }
