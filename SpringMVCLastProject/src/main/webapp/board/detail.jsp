@@ -12,7 +12,9 @@
 }
 h3 {
    text-align: center;
-   
+}
+.a-link{
+  cursor: pointer;
 }
 </style>
 </head>
@@ -45,9 +47,16 @@ h3 {
          </tr>
          <tr>
            <td colspan="4" class="text-right">
-            <a href="#" class="btn btn-xs btn-success">수정</a>
-            <a href="#" class="btn btn-xs btn-info">삭제</a>
+            <a :href="'../board/update.do?no='+vo.no" class="btn btn-xs btn-success">수정</a>
+            <a class="btn btn-xs btn-info a-link" @click="del()">{{msg}}</a>
             <a href="../board/list.do" class="btn btn-xs btn-warning">목록</a>
+           </td>
+         </tr>
+         <tr v-show="isShow">
+           <td colspan="4" class="text-right">
+            비밀번호:<input type="password" ref="pwd" size=10
+            	   class="input-sm" v-model="pwd">
+            	   <button class="btn-sm btn-success" @click="boardDelete()">삭제</button>
            </td>
          </tr>
        </tbody>
@@ -60,7 +69,10 @@ h3 {
     	data(){
     		return {
     			vo:{},
-    			no:${no}
+    			no:${no},
+    			isShow:false,
+    			pwd:'',
+    			msg:'삭제'
     		}
     	},
     	mounted(){
@@ -72,6 +84,43 @@ h3 {
     			console.log(response.data)
     			this.vo=response.data
     		})
+    	},
+    	methods:{
+    		del(){
+    			this.isShow=!this.isShow
+    			if(this.isShow==true)
+    			{
+    				this.msg='취소'
+    			}
+    			else
+    			{
+    				this.msg="삭제"
+    			}
+    		},
+    		boardDelete(){
+    			if(this.pwd==="")
+    			{
+    				this.$refs.pwd.focus()
+    				return
+    			}
+    			axios.delete("http://localhost:8080/web/board/delete_vue.do",{
+    				params:{
+    					no:this.no,
+    					pwd:this.pwd
+    				}
+    			}).then(response=>{
+    				if(response.data.msg==='yes')
+    				{
+    					location.href='../board/list.do'
+    				}
+    				else
+    				{
+    					alert("비밀번호가 틀립니다")
+    					this.pwd=''
+    					this.$refs.pwd.focus()
+    				}
+    			})
+    		}
     	}
     }).mount("#detail_app")
   </script>
