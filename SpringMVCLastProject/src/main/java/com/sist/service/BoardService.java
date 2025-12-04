@@ -7,4 +7,5 @@ public interface BoardService {
 	public List<BoardVO> BoardListData(int start,int end);
 	public int boardRowCount();
 	public void boardInsert(BoardVO vo);
+	public BoardVO boardDetailData(int no);
 }
